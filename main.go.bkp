@@ -1,0 +1,31 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Prompt the user to enter some text
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter some text: ")
+	text, _ := reader.ReadString('\n')
+
+	// Open a file for writing
+	file, err := os.Create("text.txt")
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Write the text to the file
+	_, err = file.WriteString(text)
+	if err != nil {
+		fmt.Println("Error writing to file:", err)
+		return
+	}
+
+	fmt.Println("Text saved to text.txt")
+}
